@@ -1,34 +1,52 @@
 package Animals;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public abstract class LivingForm {
+    String name;
     int posX;
     int posY;
     int step;
     double weight;
 
 
-    public LivingForm(int posX, int posY, int step, double weight) {
-        this.posX = posX;
-        this.posY = posY;
-        this.step = step;
-        this.weight = weight;
+    protected LivingForm() {
     }
+
 
     public void moveLeft(){
-        posX = posX-1;
+        if(posX!=1) {
+            posX = posX-1;}
     }
     public void moveRight(){
-        posX = posX+1;
+        if(posX!=40) {
+            posX = posX+1;}
     }
     public void moveUp(){
-        posY = posY+1;
+        if(posY!=40) {
+            posY = posY+1;}
     }
     public void moveDown(){
-        posY = posY-1;
+        if(posY!=1) {
+            posY = posY-1;}
+    }
+    public void move(){
+
+        for (int i = 0; i < this.step; i++) {
+            System.out.println("текущая позиция мышки: "+this.posX + " " + this.posY);
+            int random = ThreadLocalRandom.current().nextInt(1, 5);
+            if(random == 1){ moveDown();
+                System.out.println("мышка ушла Вниз "+ this.posX + " " + this.posY);}
+            if(random == 2){ moveUp();
+                System.out.println("мышка ушла Вверх "+ this.posX + " " + this.posY);}
+            if(random == 3){ moveRight();
+                System.out.println("мышка ушла Вправо "+ this.posX + " " + this.posY);}
+            if(random == 4){ moveLeft();
+                System.out.println("мышка ушла Влево "+ this.posX + " " + this.posY);}
+        }
     }
 
-    public void eat(){
-    }
+    public abstract void eat();
 
     public void reproduce(){
     }
