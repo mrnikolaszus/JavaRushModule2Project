@@ -1,13 +1,14 @@
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class Main{
     public static void main(String[] args) {
-        for (int x = 1; x <41 ; x++) {
-            for (int y = 1; y < 41; y++) {
-                new Cell(x, y, 0);
+      HashMap<String, Cell> island = Cell.allCells(GameField.getSizeX(), GameField.getSizeY());
 
-            }
+        System.out.println(island);
+        System.out.println(island.size());
 
-        }
-
+        System.out.println(island.get(5+" "+6));
 
     }
 }
