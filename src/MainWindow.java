@@ -1,7 +1,7 @@
-import Animals.Mouse;
-import Animals.allAnimalsEat;
+
 import Cells.Cell;
 import Cells.CellGrowing;
+import Cells.HerbivoresLifeCycle;
 
 
 public class MainWindow{
@@ -11,9 +11,9 @@ public class MainWindow{
 
 
         new Thread(new CellGrowing()).start();
+        new Thread(new HerbivoresLifeCycle()).start();
 
 
-     new Thread(new allAnimalsEat()).start();
 
 
 
