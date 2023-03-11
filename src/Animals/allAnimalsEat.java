@@ -3,7 +3,17 @@ package Animals;
 import Cells.Cell;
 import Options.GameField;
 
+import java.util.Collection;
+
 public class allAnimalsEat implements Runnable{
+
+    public static void iterateAnimals(Collection<? extends LivingForm> animals) {
+
+        for(LivingForm animal: animals) {
+
+           animal.eat();
+        }
+    }
 
 
     @Override
@@ -15,8 +25,10 @@ public class allAnimalsEat implements Runnable{
            } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            Mouse.mouses.forEach(Mouse::eat);
+           iterateAnimals(Mouse.mouses);
+
+           }
         }
    }
     }
-}
+

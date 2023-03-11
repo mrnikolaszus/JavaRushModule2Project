@@ -11,6 +11,8 @@ public class MainWindow{
 
 
         new Thread(new CellGrowing()).start();
+
+
      new Thread(new allAnimalsEat()).start();
 
 

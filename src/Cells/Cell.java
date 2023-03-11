@@ -69,7 +69,7 @@ public class Cell {
             }
 
         if(this.plants==MAX_plants && this.insectsCount==MAX_insectsCount && Mouse.mouses.size()<100){        // автосоздание мышки из ниоткуда
-            Mouse.mouses.add(new Mouse(this.posX, this.posY, 1, 0.01));
+            Mouse.mouses.add(new Mouse(this.posX, this.posY, 1, 0.005));
 
         }
 

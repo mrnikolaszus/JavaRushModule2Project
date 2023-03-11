@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Mouse extends LivingForm{
 
-    volatile public static ArrayList<Mouse> mouses = new ArrayList<>();
+    volatile public static ArrayList<LivingForm> mouses = new ArrayList<>();
 
 
     private int posX;
@@ -24,32 +24,26 @@ public class Mouse extends LivingForm{
 
     }
 
+
     @Override
     public void eat() {
-        int insects = (Cell.island.get(posX +" "+ posY).getInsectsCount());
-        System.out.println(insects);
-        if(insects>10){
-            System.out.println("Первый РАЗДЕЛ");
-            Cell.island.get(posX +" "+  posY).eatInsects(1);
-            if(this.weight<max_weight) {this.weight += 0.01;}
-            else {this.weight=max_weight;}
+        double full = max_weight * 0.4;
+        double temp =0;
+        if (this.weight < (max_weight * 0.8)) {               // если мышка сыта, то кушать не будет
+            while (this.weight < (max_weight * 0.8) || temp <= full || ((Cell.island.get(posX + " " + posY).getInsectsCount()) > 30 || (Cell.island.get(posX + " " + posY).getPlants() > 10))) {
+                if ((Cell.island.get(posX + " " + posY).getInsectsCount()) > 30) {
+                    Cell.island.get(posX + " " + posY).eatInsects(1);
+                    temp +=0.01;
+                } else if ((Cell.island.get(posX + " " + posY).getPlants()) > 10) {
+                    Cell.island.get(posX + " " + posY).eatPlants(1);
+                    temp +=0.01;
+                }
+                if (temp >= full){ this.weight +=temp;
+                break;}
+            }
+            this.weight +=temp;
         }
-
-        double plants = (Cell.island.get(posX +" "+ posY).getPlants());
-
-        if(plants>30){
-            System.out.println("ВТОРОЙ РАЗДЕЛ");
-            System.out.println(Cell.island.get(posX +" "+ posY).getPlants());
-            Cell.island.get(posX +" "+ posY).eatPlants(1);
-            if(this.weight<max_weight) {this.weight += 0.01;}
-            else {this.weight=max_weight;}
-        }
-
-        System.out.println("мышка покушала");
-        System.out.println(Cell.island.get( posX +" "+ posY).getPlants());
-        System.out.println(Cell.island.get( posX +" "+ posY).getInsectsCount());
     }
-
     public void move(){
 
         for (int i = 0; i < this.step; i++) {
