@@ -24,12 +24,12 @@ public class CellGrowing implements Runnable {
                             value.growing();
 
                     });
-            Cell.island.forEach(
-                    (key, value)
-                            -> {
-                        System.out.println(value);
-
-                    });
+//            Cell.island.forEach(
+//                    (key, value)
+//                            -> {
+//                        System.out.println(value);
+//
+//                    });
         }
     }
 }

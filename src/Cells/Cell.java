@@ -22,7 +22,7 @@ public class Cell {
     int posX;
     int posY;
      double plants;
-    static double MAX_plants = 200;
+    static double MAX_plants = 400;
 
 
     public Cell(int posX, int posY) {
@@ -60,7 +60,9 @@ public class Cell {
         this.plants += 1;
             }
 
+    }
 
+    public void newLife(){
 
     }
 
@@ -94,8 +96,8 @@ public class Cell {
     public String toString() {
         return "Cell{" +
                 ", name='" + name + '\'' +
-                "predators=" + predators +
-                ", herbivores=" + herbivores +
+                "predators=" + predators.size() +
+                ", herbivores=" + herbivores.size() +
                 ", insectsCount=" + insectsCount +
 
                 ", posX=" + posX +

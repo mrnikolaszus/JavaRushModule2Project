@@ -1,7 +1,10 @@
 
+import Animals.Sheep;
 import Cells.Cell;
 import Cells.CellGrowing;
 import Cells.HerbivoresLifeCycle;
+
+import javax.swing.plaf.TableHeaderUI;
 
 
 public class MainWindow{
@@ -11,7 +14,14 @@ public class MainWindow{
 
 
         new Thread(new CellGrowing()).start();
-        new Thread(new HerbivoresLifeCycle()).start();
+
+        Thread.sleep(1000);
+//        Cell.island.get(1+ " "+1).herbivores.add(new Sheep(1,1, 1, 3));
+//        Cell.island.get(1+ " "+1).herbivores.add(new Sheep(1,1, 1, 3));
+
+
+
+         new Thread(new HerbivoresLifeCycle()).start();
 
 
 

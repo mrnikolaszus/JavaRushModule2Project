@@ -2,6 +2,15 @@ package Animals;
 
 import Cells.Cell;
 
+import java.util.Map;
+
+/*
+Sheep:
+максимальный вес 70
+за один цикл может съесть 15кг растений, и набрать 10кг массы.
+
+
+ */
 public class Sheep extends Herbivores {
 
     private static double MAX_weight = 70;
@@ -25,8 +34,9 @@ public class Sheep extends Herbivores {
     public void eat() {
         if(this.weight>0 && this.weight < MAX_weight && checkPlants() ){
             if(cell.getPlants()> 15){
-                cell.eatPlants(50); //15
-                this.weight += 0;  // 15
+                cell.eatPlants(15); //15
+                this.weight += 10;  // 15
+                if(this.weight> MAX_weight) {this.weight = MAX_weight;}
             }
         }
     }
@@ -40,7 +50,6 @@ public class Sheep extends Herbivores {
     @Override
     public String toString() {
         return "Sheep{" +
-                "cell=" + cell +
                 ", posX=" + posX +
                 ", posY=" + posY +
                 ", weight=" + weight +
