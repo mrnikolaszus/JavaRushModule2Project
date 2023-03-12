@@ -2,6 +2,7 @@ package Animals;
 
 import Cells.Cell;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -19,7 +20,7 @@ public class Sheep extends Herbivores {
         super(posX, posY, weight, speed);
         this.hunger = 3;
         this.cell = Cell.island.get(this.posX + " " + this.posY);
-        System.out.println("конструктор овечки + this.hunger: " + this.hunger );
+//        System.out.println("конструктор овечки + this.hunger: " + this.hunger );
 
     }
 
@@ -42,24 +43,34 @@ public class Sheep extends Herbivores {
     }
     @Override
     public void reproduce(){
-//        System.out.println("начинаем плодится так как вес  такой: " + this.weight );
-        int thisAnimalCount =0;
-//        System.out.println(this + " проверяет ячейку" + this.cell + "нет ли тут таких же как животное.");
-        for (int i = 0; i < this.cell.herbivores.size(); i++) {
-            if(this.cell.herbivores.get(i).getClass()==this.getClass()){
-                thisAnimalCount++;
+        int sheeps = 0;
+        ArrayList<String> herblist = new ArrayList<>();
+        this.cell.herbivores.forEach(herbivores -> herblist.add(herbivores.getClass().toString()));
+        for (String s : herblist) {
+            if (s.toUpperCase().contains("sheep".toUpperCase())) {
+                sheeps++;
             }
+        }
+//        System.out.println("начинаем плодится так как вес  такой: " + this.weight );
 
-            if(thisAnimalCount>2){
+            if(sheeps>2 && sheeps<70){
 //                System.out.println("на этой ячейки всего животных такого типа: " + thisAnimalCount);
                 int random = ThreadLocalRandom.current().nextInt(1, 100);
                 if(random>90){
-//                    System.out.println("рождение животного");
+                    System.out.println("рождение овцы, всего овец на этой ячейке: " + sheeps);
                     this.cell.herbivores.add(new Sheep(this.posX,this.posY, 10, 3));
                     System.out.println(this.cell.herbivores.get(this.cell.herbivores.size()-1));
                 }
             }
-
+        if(sheeps>70 && sheeps<140){
+//                System.out.println("на этой ячейки всего животных такого типа: " + thisAnimalCount);
+            int random = ThreadLocalRandom.current().nextInt(1, 100);
+            if(random>70){
+                   System.out.println("рождение двух овец, всего овец на этой ячейке: " + sheeps);
+                this.cell.herbivores.add(new Sheep(this.posX,this.posY, 10, 3));
+                this.cell.herbivores.add(new Sheep(this.posX,this.posY, 10, 3));
+                System.out.println(this.cell.herbivores.get(this.cell.herbivores.size()-1));
+            }
         }
     }
 

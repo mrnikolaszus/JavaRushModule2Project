@@ -30,7 +30,7 @@ public class Mouse extends Herbivores {
 
     @Override
     public boolean checkInsects(){
-        return this.cell.getInsectsCount()>5;
+        return this.cell.getInsectsCount()>3;
     }
 
 
@@ -42,17 +42,13 @@ public class Mouse extends Herbivores {
     @Override
     public void reproduce() {
         int mouses = 0;
-
-
         ArrayList<String> herblist = new ArrayList<>();
-
         this.cell.herbivores.forEach(herbivores -> herblist.add(herbivores.getClass().toString()));
         for (String s : herblist) {
             if (s.toUpperCase().contains("mouse".toUpperCase())) {
                 mouses++;
             }
         }
-
 
             if (mouses > 2 && mouses<100 ) {
 //                System.out.println("на этой ячейки всего животных такого типа: " + thisAnimalCount);
@@ -108,12 +104,13 @@ public class Mouse extends Herbivores {
     @Override
     public void eat() {
         boolean insects = false;
-        if(this.weight>0 && this.weight < MAX_weight && checkInsects() ){
+        int random = ThreadLocalRandom.current().nextInt(1, 1000);
+        if(this.weight>0 && this.weight < MAX_weight && checkInsects() && random >100){
 //            System.out.println("кушаем гусениц");
             insects = true;
-            if(cell.getInsectsCount()> 5){
-                cell.eatInsects(5);
-                this.weight += 0.01;  // 0.01
+            if(cell.getInsectsCount()> 3){
+                cell.eatInsects(1);
+                this.weight += 0.015;  // 0.01
                 if(this.weight> MAX_weight) {this.weight = MAX_weight;}
             }
         }
@@ -121,7 +118,7 @@ public class Mouse extends Herbivores {
         if(this.weight>0 && this.weight < MAX_weight && checkPlants() && !insects ){
 //            System.out.println("кушаем травку");
             if(cell.getPlants()> 3){
-                cell.eatPlants(3);
+                cell.eatPlants(1);
                 this.weight += 0.01;  // 0.01
                 if(this.weight> MAX_weight) {this.weight = MAX_weight;}
             }

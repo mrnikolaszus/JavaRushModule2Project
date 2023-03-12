@@ -29,7 +29,7 @@ public class GameField {
 
     */
 
-    static private int cycle = 500;
+    static private int cycle = 50;
     static private int sizeX = 30;
     static private int sizeY = 30;
 

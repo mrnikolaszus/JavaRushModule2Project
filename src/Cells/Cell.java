@@ -3,6 +3,7 @@ package Cells;
 
 import Animals.Herbivores;
 import Animals.Mouse;
+import Animals.Predators;
 import Animals.Sheep;
 import Options.GameField;
 
@@ -17,7 +18,7 @@ public class Cell {
     volatile public static ConcurrentHashMap<String, Cell> island = Cell.allCells(GameField.getSizeX(), GameField.getSizeY());
     // String = posX +" "+ posY
 
-    public CopyOnWriteArrayList<Object> predators;
+    public CopyOnWriteArrayList<Predators> predators;
     public CopyOnWriteArrayList<Herbivores> herbivores;
     int insectsCount;
     int MAX_insectsCount =1000;
@@ -64,8 +65,8 @@ public class Cell {
         this.plants += 1;
             }
         if(this.plants>(MAX_plants*0.9) && this.insectsCount>(MAX_insectsCount*0.9)){
-            int random = ThreadLocalRandom.current().nextInt(1, 1001);
-            if (random > 999) {
+            int random = ThreadLocalRandom.current().nextInt(1, 10001);
+            if (random > 9999) {
                 this.newLife();
             }
         }
@@ -74,9 +75,14 @@ public class Cell {
 
     public void newLife(){
         System.out.println("благодаря изобилию и удаче новая жизнь появилась на острове:");
+        int random = ThreadLocalRandom.current().nextInt(1, 101);
+        if(random < 70 ){
         this.herbivores.add(new Mouse(this.posX,this.posY, 0.02, 1));
-       System.out.println(this.herbivores.get(this.herbivores.size()-1));
-
+            System.out.println(this.herbivores.get(this.herbivores.size()-1));}
+        else if (random > 70) {
+            this.herbivores.add(new Sheep(this.posX,this.posY, 10, 3));
+            System.out.println(this.herbivores.get(this.herbivores.size()-1));
+    }
 
     }
 
