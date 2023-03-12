@@ -19,7 +19,7 @@ public class HerbivoresLifeCycle implements Runnable {
                     }
                 }
             try {
-                Thread.sleep(GameField.getCycle() / 10);
+                Thread.sleep(GameField.getCycle() / 2);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

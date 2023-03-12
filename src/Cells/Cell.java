@@ -2,12 +2,15 @@ package Cells;
 
 
 import Animals.Herbivores;
+import Animals.Mouse;
+import Animals.Sheep;
 import Options.GameField;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 public class Cell {
@@ -22,7 +25,7 @@ public class Cell {
     int posX;
     int posY;
      double plants;
-    static double MAX_plants = 400;
+    static double MAX_plants = 300;
 
 
     public Cell(int posX, int posY) {
@@ -32,7 +35,8 @@ public class Cell {
         this.name = + posX +" "+  posY;
         this.posX = posX;
         this.posY = posY;
-        this.plants = 100;  // начинаем с нуля лучше
+        this.plants = 270;  // лучше с нуля начинать
+        this.insectsCount = 970; // лучше с нуля начинать
     }
 
     public static ConcurrentHashMap<String,Cell> allCells(int x, int y) {   // метод для создания всех ячеек
@@ -59,10 +63,20 @@ public class Cell {
         if(this.plants<MAX_plants){
         this.plants += 1;
             }
+        if(this.plants>(MAX_plants*0.9) && this.insectsCount>(MAX_insectsCount*0.9)){
+            int random = ThreadLocalRandom.current().nextInt(1, 1001);
+            if (random > 999) {
+                this.newLife();
+            }
+        }
 
     }
 
     public void newLife(){
+        System.out.println("благодаря изобилию и удаче новая жизнь появилась на острове:");
+        this.herbivores.add(new Mouse(this.posX,this.posY, 0.02, 1));
+       System.out.println(this.herbivores.get(this.herbivores.size()-1));
+
 
     }
 

@@ -11,7 +11,7 @@ public abstract class Animal {
 
     static double MAX_weight;
     int speed;
-
+    double hunger;
 
     public Animal(int posX, int posY, double weight, int speed) {
         this.posX = posX;
